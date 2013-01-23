@@ -26,69 +26,71 @@ class IdError(PyInterstateError):
 
 
 class MetaBase(object):
-    _rest_methods = ('get', 'put', 'post', 'delete')
-    _is_rest_method = lambda inst, name: bool(name.lower() in getattr(inst, '_rest_methods'))
+    rest_methods = ('get', 'put', 'post', 'delete')
+    is_rest_method = lambda inst, name: bool(name.lower() in getattr(inst, '_rest_methods'))
 
     def __init__(self, oauth_token):
-        self._metanames = []
-        self._rest_method = None
+        self.metanames = []
+        self.rest_method = None
         self.oauth_token = oauth_token 
         self.params = {}
     
     def __call__(self, object_id=None, params=None):
-        resource = self._resource(object_id)
+        resource = self.resource(object_id)
 
         if params:
             self.params.update(params)
 
-        if not self._rest_method:
+        if not self.rest_method:
             return self
         else:
-            return self._validate_request(resource)
+            return self.validate_request(resource)
     
     def __getattr__(self, metaname):
+        _metaname = 'meta_'.format(metaname)
+
         setattr(self, metaname, self._meta)
 
-        if not self._is_rest_method(metaname):
-            self._metanames.append(metaname)
+        if not self.is_rest_method(metaname):
+            self.metanames.append(metaname)
         else:
-            self._rest_method = metaname.lower()
+            self.rest_method = metaname.lower()
 
-        return getattr(self, metaname)
+        return getattr(self, _metaname)
 
     @property
     def _meta(self):
         return self
 
-    def _resource(self, object_id):
+    def resource(self, object_id):
         if object_id != None:
-            self._metanames.append(object_id)
+            self.metanames.append(object_id)
 
         resource = '/'.join(self._metanames)
     
         return resource
 
-    def _validate_request(self, resource):
+    def validate_request(self, resource):
         try:
-            if self._rest_method in ('get', 'delete') and self.params:
+            if self.rest_method in ('get', 'delete') and self.params:
                 raise RequestHasParamsError("method does not support parameters.")
-            elif self._rest_method in ('post', 'put') and not self.params:
+            elif self.rest_method in ('post', 'put') and not self.params:
                 raise RequestRequiresParamsError("method must include parameter.")
         except RequestHasParamsError as e:
             print("{0}: {1} {2} {3}".format(e.__class__.__name__,
-                                            self._rest_method.upper(),
+                                            self.rest_method.upper(),
                                             e.args[0],
                                             e.generic_error_message))
 
         except RequestRequiresParamsError as e:
             print("{0}: {1} {2} {3}".format(e.__class__.__name__,
-                                            self._rest_method.upper(),
+                                            self.rest_method.upper(),
                                             e.args[0],
                                             e.generic_error_message))
         else:
-            return self._request(resource=resource, method=self._rest_method, params=self.params)
+            return self.request(resource=resource, method=self._rest_method, params=self.params)
 
-    def _request(self):
+    def request(self):
         raise NotImplementedError
 
 
@@ -100,7 +102,7 @@ class PyInterstate2(MetaBase):
     request_timeout = 2.000 
 
     @property
-    def _base_url(self):
+    def base_url(self):
         base_url_kwargs = {'protocol' : self.protocol,
                            'base_url' : self.base_url,
                            'api_version' : self.api_version}
@@ -109,7 +111,7 @@ class PyInterstate2(MetaBase):
 
         return base_url
 
-    def _resource_url(self, resource):
+    def resource_url(self, resource):
         base_resource_url_kwargs = {'base_url' : self._base_url,
                                     'resource' : resource}
 
@@ -117,7 +119,7 @@ class PyInterstate2(MetaBase):
 
         return resource_url
 
-    def _request(self, resource, method='get', params={}):
+    def request(self, resource, method='get', params={}):
         resource_url = self._resource_url(resource)
         request_url_kwargs = {'resource_url' : resource_url,
                               'oauth_token' : self.oauth_token,
