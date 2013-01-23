@@ -8,6 +8,7 @@ class PyInterstateError(Exception):
 
 class AuthError(PyInterstateError):
     """Exception raised upon authentication errors."""
+    pass
 
 class RequestError(PyInterstateError):
     """Exception raised upon violating standard request format."""
@@ -47,7 +48,7 @@ class MetaBase(object):
             return self.validate_request(resource)
     
     def __getattr__(self, metaname):
-        _metaname = 'meta_'.format(metaname)
+        _metaname = 'meta_{0}'.format(metaname)
 
         setattr(self, metaname, self._meta)
 
