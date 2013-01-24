@@ -60,6 +60,5 @@ class PyInterstate2(MetaBase):
             return response.content
 
 
-interstate_app = PyInterstate2(oauth_token='')
-
-print(interstate_app.project(object_id='').get())
+#interstate_app = PyInterstate2(oauth_token='')
+#print(interstate_app.project(object_id='').get())
