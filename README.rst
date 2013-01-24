@@ -49,4 +49,4 @@ Example Requests:
     interstate_app.project(object_id='<project_id>').delete()
 
 
-`More info <http://developers-v2.interstateapp.com/docs/rest>`_
+`More info <http://developers-v2.interstateapp.com/docs/rest>`_ on InterstateApp's v2 REST API
