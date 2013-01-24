@@ -1,12 +1,9 @@
 class MetaBase(object):
     rest_methods = ('get', 'put', 'post', 'delete')
-    is_rest_method = lambda inst, name: bool(name.lower() in getattr(inst, '_rest_methods'))
-
-    def __init__(self, oauth_token):
-        self.metanames = []
-        self.rest_method = None
-        self.oauth_token = oauth_token 
-        self.params = {}
+    is_rest_method = lambda inst, name: bool(name.lower() in getattr(inst, 'rest_methods'))
+    metanames = []
+    rest_method = None
+    params = {}
     
     def __call__(self, object_id=None, params=None):
         resource = self.resource(object_id)
@@ -22,7 +19,7 @@ class MetaBase(object):
     def __getattr__(self, metaname):
         _metaname = 'meta_{0}'.format(metaname)
 
-        setattr(self, metaname, self._meta)
+        setattr(self, _metaname, self._meta)
 
         if not self.is_rest_method(metaname):
             self.metanames.append(metaname)
@@ -39,7 +36,7 @@ class MetaBase(object):
         if object_id != None:
             self.metanames.append(object_id)
 
-        resource = '/'.join(self._metanames)
+        resource = '/'.join(self.metanames)
     
         return resource
 
@@ -61,7 +58,7 @@ class MetaBase(object):
                                             e.args[0],
                                             e.generic_error_message))
         else:
-            return self.request(resource=resource, method=self._rest_method, params=self.params)
+            return self.request(resource=resource, method=self.rest_method, params=self.params)
 
     def request(self):
         raise NotImplementedError
