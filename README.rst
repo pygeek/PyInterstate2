@@ -26,7 +26,7 @@ To authenticate, initialize InterstateApp with the provided oauth_token.
 Example Requests:
 -----------------
 
-.. code-block:: pycon
+.. code-block:: python
 
     #resource GET /account
     interstate_app.account.get() 
