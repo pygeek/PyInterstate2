@@ -19,6 +19,7 @@ Quick Guide
 To authenticate, initialize InterstateApp with the provided oauth_token.
 
 .. code-block:: pycon
+
     >>> interstate_app = PyInterstate2(oauth_token='<oauth_token>')
     ...
 
@@ -26,6 +27,7 @@ Example Requests:
 -----------------
 
 .. code-block:: pycon
+
     #resource GET /account
     interstate_app.account.get() 
 
