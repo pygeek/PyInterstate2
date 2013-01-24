@@ -11,7 +11,7 @@ Requirements
 
 Dependancies
 ------------
-- `requests <https://github.com/kennethreitz/requests>`
+- `requests <https://github.com/kennethreitz/requests>`_
 
 Quick Guide
 -----------
