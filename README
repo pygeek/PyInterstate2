@@ -1,0 +1,2 @@
+- Requires Python2.6+
+- Dependancy requests (see: https://github.com/kennethreitz/requests)
