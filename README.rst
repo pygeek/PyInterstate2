@@ -25,7 +25,7 @@ To authenticate, initialize InterstateApp with the provided oauth_token.
 Example Requests:
 -----------------
 
-.. code-block:: 
+.. code-block:: pycon
     #resource GET /account
     interstate_app.account.get() 
 
@@ -49,4 +49,4 @@ Example Requests:
     interstate_app.project(object_id='<project_id>').delete()
 
 
-`More info<http://developers-v2.interstateapp.com/docs/rest>`
+`More info <http://developers-v2.interstateapp.com/docs/rest>`_
