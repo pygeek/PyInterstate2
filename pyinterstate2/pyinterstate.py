@@ -5,7 +5,7 @@ import defaults
 from base import MetaBase
 from exceptions import *
 
-class PyInterstate2(MetaBase):
+class PyInterstate(MetaBase):
     settings = ('protocol',
                 'api_host',
                 'api_version',
@@ -58,7 +58,3 @@ class PyInterstate2(MetaBase):
             print(RequestError('RequestError: Request has exceeded specified timeout limit of {0} seconds'.format(self.request_timeout)))
         else:
             return response.content
-
-
-#interstate_app = PyInterstate2(oauth_token='')
-#print(interstate_app.project(object_id='').get())
