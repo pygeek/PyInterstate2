@@ -20,8 +20,7 @@ To authenticate, initialize InterstateApp with the provided oauth_token.
 
 .. code-block:: pycon
 
-    >>> interstate_app = PyInterstate2(oauth_token='<oauth_token>')
-    ...
+    interstate_app = PyInterstate2(oauth_token='<oauth_token>')
 
 Example Requests:
 -----------------
