@@ -1,4 +1,4 @@
-PyInterstate2: A Python wrapper for InterstateApp
+PyInterstate2: A Python wrapper for the InterstateApp v2 REST API
 =================================================
 
 Support for all resources in InterstateApp v2 REST API as `documented <http://developers-v2.interstateapp.com/docs/rest>`_.
