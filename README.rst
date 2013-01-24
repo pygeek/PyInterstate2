@@ -3,7 +3,8 @@ PyInterstate2: A Python wrapper for InterstateApp
 
 Support for all resources in InterstateApp v2 REST API as `documented <http://developers-v2.interstateapp.com/docs/rest>`_.
 
-version = 2.0.0.0 alpha 2 *see TODO for information on future releases*
+v2.0.0.0 alpha 2
+**see TODO for information on future releases**
 
 Requirements
 ------------
