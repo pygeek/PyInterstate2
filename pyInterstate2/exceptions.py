@@ -1,23 +1,20 @@
 class PyInterstateError(Exception):
-    """Base class for Interstate App Exceptions."""
+    """Base class for PyInterstate Exceptions."""
     generic_error_message = "Please see InterstateApp API documentation for more details."
 
 class AuthError(PyInterstateError):
     """Exception raised upon authentication errors."""
 
 class RequestError(PyInterstateError):
-    """Exception raised upon violating standard request format."""
+    """Base class for request specific Exceptions"""
     pass
 
 class RequestHasParamsError(RequestError):
+    """Exception raised when PUT or POST are not provided parameters"""
     pass
 
 class RequestRequiresParamsError(RequestError):
-    pass
-
-class IdError(PyInterstateError):
-    """Raised when an operation attempts to query's an Interstate \
-        Road or Roadmap that does not exist."""
+    """Exception raised when PUT or POST are not provided parameters"""
     pass
 
 
