@@ -17,20 +17,15 @@ class MetaBase(object):
             return self.validate_request(resource)
     
     def __getattr__(self, metaname):
-        _metaname = 'meta_{0}'.format(metaname)
-
-        setattr(self, _metaname, self._meta)
+        return_value = None
 
         if not self.is_rest_method(metaname):
             self.metanames.append(metaname)
+            return_value = self
         else:
             self.rest_method = metaname.lower()
 
-        return getattr(self, _metaname)
-
-    @property
-    def _meta(self):
-        return self
+        return return_value
 
     def resource(self, object_id):
         if object_id != None:
